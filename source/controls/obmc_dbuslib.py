@@ -2,6 +2,9 @@
 import json
 import sys
 import dbus
+import fcntl
+import socket
+import struct
 
 SLOT_ID =  {'SlotId':'GetJ2010RackSlotID'
               }
@@ -70,6 +73,18 @@ INVENTORY_ITEMS = ['SYSTEM',
                    'SYSTEM_EVENT',
                    'MEMORY_BUFFER']
 
+
+def get_ip_address (ifname):
+    """
+    Get the first IPv4 address bound to ifname.
+    This function may raise IOError.
+    """
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    ifaddr = fcntl.ioctl(
+        sock.fileno(),
+        0x8915, # SIOCGIFADDR
+        struct.pack('256s', ifname[:15]))
+    return socket.inet_ntoa(ifaddr[20:24])
 
 class ObmcRedfishProviders(object):
     """OpenBMC Redfish Providers using DBUS"""
@@ -418,9 +433,15 @@ class ObmcRedfishProviders(object):
         else:
             exit(1)
 
-    def get_slot_id(self, op):
-        # FIXME wait for Microsoft's specification on how to assign slot ID
-        return 0
+    def get_slot_id (self):
+        """
+        Return the last part of IPv4 address of eth0 as slot ID.
+        That is, if eth0 binds to A.B.C.D, then slot ID will be D.
+        This function may raise IOError.
+        """
+        ip = get_ip_address('eth0')
+        _, _, _, slot_id = [int(part) for part in ip.split('.')]
+        return slot_id
 
 # Not working yet
     def get_host_settings(self):

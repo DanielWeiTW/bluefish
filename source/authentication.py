@@ -10,10 +10,10 @@ from controls.obmc_dbuslib import ObmcRedfishProviders
 from controls.manage_fwversion import *
 
 dbusctl = ObmcRedfishProviders()
-CHASSIS_SLOT_ID =  dbusctl.get_slot_id(str('SlotId'))
 
 def pre_check_slot_id (slot_id):
-    if str(CHASSIS_SLOT_ID) == str(slot_id):
+    expected_slot_id =  dbusctl.get_slot_id()
+    if str(expected_slot_id) == str(slot_id):
         return
     else:
         raise HTTPError(status=403, body="System is not present.")

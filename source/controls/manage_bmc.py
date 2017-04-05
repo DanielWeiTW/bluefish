@@ -96,10 +96,9 @@ def bmc_i2c_master_write_read(bus, slaveaddress, readcount, writedata):
 
 def get_bmc_slot_id():
     result = {}
-    op = 'SlotId'
     try:
         dbusctl = obmc_dbuslib.ObmcRedfishProviders()
-        pydata = dbusctl.get_slot_id(str(op))
+        pydata = dbusctl.get_slot_id()
     except Exception, e:
         return set_failure_dict(('Exception:', e), completion_code.failure)
     result["SLOT_ID"] = str(pydata)
