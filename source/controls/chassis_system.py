@@ -11,6 +11,7 @@ import obmc_dbuslib
 
 from obmc.dbuslib.bindings import get_dbus, DbusProperties, DbusObjectManager
 from utils import completion_code
+from utils import set_failure_dict
 
 bus = get_dbus()
 
@@ -45,4 +46,23 @@ def get_chassis_fru():
     result[completion_code.cc_key] = completion_code.success
 
     return result
-    
+
+def post_chassis_action_power_on():
+    try:
+        dbusctl = obmc_dbuslib.ObmcRedfishProviders()
+        dbusctl.power_control('On')
+        result = {}
+        result[completion_code.cc_key] = completion_code.success
+        return result
+    except Exception, e:
+        return set_failure_dict(('Exception:', e), completion_code.failure)
+
+def post_chassis_action_power_off():
+    try:
+        dbusctl = obmc_dbuslib.ObmcRedfishProviders()
+        dbusctl.power_control('ForceOff')
+        result = {}
+        result[completion_code.cc_key] = completion_code.success
+        return result
+    except Exception, e:
+        return set_failure_dict(('Exception:', e), completion_code.failure)
