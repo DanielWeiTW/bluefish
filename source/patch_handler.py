@@ -218,16 +218,7 @@ def patch_chassis(slot_id):
 
 @auth_basic(authentication.validate_user)
 def patch_chassis_storage_enclosure(slot_id, se_id):
-    pre_check_slot_id(slot_id)
-
-    actions = {
-        "PowerState": (controls.storage_enclosure.set_expander_power,
-                         parameter_parser("setting", int, enums.PowerState), {"expander_id": int(se_id)})
-    }
-
-    result = validate_patch_request_and_execute(actions, "chassis")
-
-    return get_handler.get_chassis_storage_enclosure(slot_id, se_id, patch=result)
+    raise NotImplementedError()
 
 ###################
 # BMC components

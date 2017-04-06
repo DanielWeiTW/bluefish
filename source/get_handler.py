@@ -227,16 +227,7 @@ def get_chassis_storage_enclosure (slot_id, se_id, patch = dict ()):
 
 @auth_basic (authentication.validate_user)
 def get_chassis_storage_enclosure_storage (slot_id, se_id):
-    pre_check_slot_id(slot_id)
-
-    query = [
-        (controls.manage_bmc.get_bmc_slot_id, {}),
-        (controls.storage_enclosure.get_expander_firmware_version, {"expander_id": int(se_id)})
-    ]
-
-    result = execute_get_request_queries(query)
-
-    return view_helper.return_redfish_resource ("chassis_storage_enclosure_storage", values = result)
+    raise NotImplementedError()
 
 @auth_basic (authentication.validate_user)
 def get_chassis_storage_enclosure_power (slot_id, se_id):
@@ -271,22 +262,7 @@ def get_chassis_storage_enclosure_thermal (slot_id, se_id):
 
 @auth_basic (authentication.validate_user)
 def get_chassis_storage_enclosure_drive (slot_id, se_id, disk_id):
-    pre_check_slot_id(slot_id)
-
-    if(not(1 <= int(se_id) and int(se_id) <= 4)):
-        raise HTTPError (status = 404)
-
-    if(not(1 <= int(disk_id) and int(disk_id) <= 22)):
-        raise HTTPError (status = 404)
-        
-    query = [
-        (controls.manage_bmc.get_bmc_slot_id, {}),
-        (controls.storage_enclosure.get_expander_drive_status, {"expander_id": int(se_id),  "drive_id": int(disk_id)})
-    ]
-
-    result = execute_get_request_queries(query)
-
-    return view_helper.return_redfish_resource ("chassis_storage_enclosure_drive", values = result)
+    raise NotImplementedError()
 
 #########################
 # BMC components

@@ -174,16 +174,7 @@ def post_chassis_storage_enclosure_disk_power_off(slot_id, se_id, disk_id):
 
 @auth_basic (authentication.validate_user)
 def post_chassis_se_master_write_read(slot_id, se_id):
-    pre_check_slot_id(slot_id)
-    result = {}
-    validation = {
-        "WriteData": parameter_parser("writedata", str)
-    }
-    params = validate_action_parameters(validation)
-    result = controls.manage_chassis.se_i2c_master_write_read(se_id, **params)
-    if result[completion_code.cc_key] == completion_code.failure:
-        return check_action_result(result)
-    return view_helper.return_redfish_resource ("chassis_se_master_write_read", values = result)
+    raise NotImplementedError()
 
 ############################
 # Account service components
