@@ -419,17 +419,8 @@ class ObmcRedfishProviders(object):
             exit(1)
 
     def get_slot_id(self, op):
-        if op in SLOT_ID.keys():
-            method_name = SLOT_ID[op]
-            obj = self.bus.get_object('org.openbmc.control.Chassis',
-                                      '/org/openbmc/control/chassis0')
-            intf = dbus.Interface(obj, 'org.openbmc.control.Chassis')
-            mthd = obj.get_dbus_method(method_name,
-                                       'org.openbmc.control.Chassis')
-            out = mthd()
-            return out
-        else:
-            exit (1)
+        # FIXME wait for Microsoft's specification on how to assign slot ID
+        return 0
 
 # Not working yet
     def get_host_settings(self):
