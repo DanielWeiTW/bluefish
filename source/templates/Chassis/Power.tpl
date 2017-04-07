@@ -81,6 +81,10 @@
                 "UpperThresholdCritical": "{{vs}}",
             % elif ks == "lower_critical_threshold":
                 "LowerThresholdCritical": "{{vs}}",
+            % elif ks == "min_reading_range":
+                "MinReadingRange": "{{vs}}",
+            % elif ks == "max_reading_range":
+                "MaxReadingRange": "{{vs}}",
             % end
         % end
         "Status": {

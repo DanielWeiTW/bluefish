@@ -27,29 +27,40 @@ def get_sensor_name(sensor_path):
 
 sensor_mainboard_temperature_table =\
 [\
-    "/org/openbmc/sensors/temperature/Main_Board_Temp",\
-    "/org/openbmc/sensors/Fans/Fan_HSC_Temp",\
-    "/org/openbmc/sensors/temperature/PDB_Temp"\
+    "/org/openbmc/sensors/temperature/TMP1",\
+    "/org/openbmc/sensors/temperature/TMP2",\
+    "/org/openbmc/sensors/temperature/TMP3",\
+    "/org/openbmc/sensors/temperature/TMP4",\
+    "/org/openbmc/sensors/temperature/TMP5",\
+    "/org/openbmc/sensors/temperature/TMP6",\
+    "/org/openbmc/sensors/temperature/TMP7",\
+    "/org/openbmc/sensors/temperature/TMP8"
 ]
 
 sensor_fan_pwm_table =\
 [\
-    "/org/openbmc/sensors/speed/Fan_PWM_1",\
-    "/org/openbmc/sensors/speed/Fan_PWM_2",\
-    "/org/openbmc/sensors/speed/Fan_PWM_3",\
-    "/org/openbmc/sensors/speed/Fan_PWM_4"\
+    "/org/openbmc/control/fan/fan1",
+    "/org/openbmc/control/fan/fan2",
+    "/org/openbmc/control/fan/fan3",
+    "/org/openbmc/control/fan/fan4",
+    "/org/openbmc/control/fan/fan5",
+    "/org/openbmc/control/fan/fan6"
 ]
 
 sensor_fan_rpm_table =\
 [\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_1",\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_2",\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_3",\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_4",\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_5",\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_6",\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_7",\
-    "/org/openbmc/sensors/Thermal/Fans/Fan_RPM_8"\
+    "/org/openbmc/sensors/fan/fan_tacho1",
+    "/org/openbmc/sensors/fan/fan_tacho2",
+    "/org/openbmc/sensors/fan/fan_tacho3",
+    "/org/openbmc/sensors/fan/fan_tacho4",
+    "/org/openbmc/sensors/fan/fan_tacho5",
+    "/org/openbmc/sensors/fan/fan_tacho6",
+    "/org/openbmc/sensors/fan/fan_tacho7",
+    "/org/openbmc/sensors/fan/fan_tacho8",
+    "/org/openbmc/sensors/fan/fan_tacho9",
+    "/org/openbmc/sensors/fan/fan_tacho10",
+    "/org/openbmc/sensors/fan/fan_tacho11",
+    "/org/openbmc/sensors/fan/fan_tacho12"
 ]
 
 def get_chassis_thermal():
@@ -65,7 +76,7 @@ def get_chassis_thermal():
             property['sensor_name'] = get_sensor_name(sensor_mainboard_temperature_table[index])
             property['value'] = 0
             property['upper_critical_threshold'] = 0
-                
+
             object = bus.get_object(DBUS_NAME, sensor_mainboard_temperature_table[index])
             interface = dbus.Interface(object, DBUS_INTERFACE)
 
@@ -73,7 +84,7 @@ def get_chassis_thermal():
 
             value = interface.Get(SENSOR_VALUE_INTERFACE, 'value')
 
-            property['value'] = value * math.pow(10, scale)
+            property['value'] = value
 
             property['upper_critical_threshold'] = interface.Get(SENSOR_THRESHOLD_INTERFACE, 'critical_upper')
 
@@ -92,21 +103,18 @@ def get_chassis_thermal():
             object = bus.get_object(DBUS_NAME, sensor_fan_pwm_table[index/2])
             interface = dbus.Interface(object, DBUS_INTERFACE)
 
-            properties = interface.GetAll(SENSOR_VALUE_INTERFACE)
             property['PWM'] = interface.Get(SENSOR_VALUE_INTERFACE, 'value')
 
             object = bus.get_object(DBUS_NAME, sensor_fan_rpm_table[index])
             interface = dbus.Interface(object, DBUS_INTERFACE)
-            
+
             property['value'] = interface.Get(SENSOR_VALUE_INTERFACE, 'value')
 
             property['upper_critical_threshold'] = interface.Get(SENSOR_THRESHOLD_INTERFACE, 'critical_upper')
 
-            property['sensor_number'] = interface.Get(SENSOR_HWMON_INTERFACE, 'sensornumber')
-
             result['fans'][str(index)] = property
-            
+
     except Exception, e:
         print "!!! DBus error !!!\n"
-            
+
     return result
