@@ -25,6 +25,38 @@
     setdefault ("psu2_firmware_version", "")    
     setdefault ("psu2_serial_number", "")
     setdefault ("psu2_part_number", "")
+
+    setdefault ("psu3_power_capacity", "")
+    setdefault ("psu3_power_output_watt", "")
+    setdefault ("psu3_model_number", "")
+    setdefault ("psu3_manufacturer_name", "")
+    setdefault ("psu3_firmware_version", "")
+    setdefault ("psu3_serial_number", "")
+    setdefault ("psu3_part_number", "")
+
+    setdefault ("psu4_power_capacity", "")
+    setdefault ("psu4_power_output_watt", "")
+    setdefault ("psu4_model_number", "")
+    setdefault ("psu4_manufacturer_name", "")
+    setdefault ("psu4_firmware_version", "")
+    setdefault ("psu4_serial_number", "")
+    setdefault ("psu4_part_number", "")
+
+    setdefault ("psu5_power_capacity", "")
+    setdefault ("psu5_power_output_watt", "")
+    setdefault ("psu5_model_number", "")
+    setdefault ("psu5_manufacturer_name", "")
+    setdefault ("psu5_firmware_version", "")
+    setdefault ("psu5_serial_number", "")
+    setdefault ("psu5_part_number", "")
+
+    setdefault ("psu6_power_capacity", "")
+    setdefault ("psu6_power_output_watt", "")
+    setdefault ("psu6_model_number", "")
+    setdefault ("psu6_manufacturer_name", "")
+    setdefault ("psu6_firmware_version", "")
+    setdefault ("psu6_serial_number", "")
+    setdefault ("psu6_part_number", "")
 %>
 
 {
@@ -197,6 +229,222 @@
         "FirmwareVersion": "{{psu2_firmware_version}}",
         "SerialNumber": "{{psu2_serial_number}}",
         "PartNumber": "{{psu2_part_number}}",
+        "RelatedItem": [
+        {
+            "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}"
+        }
+        ],
+        "Redundancy": [
+            {
+                "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/Redundancy/0"
+            }
+        ]
+    },
+    {
+        "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/PowerSupplies/3",
+        "MemberId": "3",
+        "Name": "Power Supply Bay 3",
+        "Status": {
+            "State": "Enabled",
+            "Health": "Warning",
+            "Oem": {
+                "Microsoft": {
+                    "@odata.type": "#OcsPower.v1_0_0.Status",
+                    "Faults": "Faults"
+                }
+            }
+        },
+        "Oem": {
+            "Actions": {
+                "#PowerSupply.ClearFaults": {
+                    "target":  "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/3/Actions/PowerSupply.ClearFaults"
+                },
+                "#PowerSupply.FirmwareUpdate": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/3/Actions/PowerSupply.FirmwareUpdate",
+                    "FWRegion@Redfish.AllowableValues": [
+                        "A",
+                        "B",
+                        "Bootloader"
+                    ]
+                },
+                "#PowerSupply.FirmwareUpdateState": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/3/Actions/PowerSupply.FirmwareUpdateState",
+                    "Operation@Redfish.AllowableValues": [
+                        "Abort",
+                        "Query"
+                    ]
+                }
+            }
+        },
+        "PowerCapacityWatts": "{{psu3_power_capacity}}",
+        "LastPowerOutputWatts": "{{psu3_power_output_watt}}",
+        "Model": "{{psu3_model_number}}",
+        "Manufacturer": "{{psu3_manufacturer_name}}",
+        "FirmwareVersion": "{{psu3_firmware_version}}",
+        "SerialNumber": "{{psu3_serial_number}}",
+        "PartNumber": "{{psu3_part_number}}",
+        "RelatedItem": [
+        {
+            "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}"
+        }
+        ],
+        "Redundancy": [
+            {
+                "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/Redundancy/0"
+            }
+        ]
+    },
+    {
+        "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/PowerSupplies/4",
+        "MemberId": "4",
+        "Name": "Power Supply Bay 4",
+        "Status": {
+            "State": "Enabled",
+            "Health": "Warning",
+            "Oem": {
+                "Microsoft": {
+                    "@odata.type": "#OcsPower.v1_0_0.Status",
+                    "Faults": "Faults"
+                }
+            }
+        },
+        "Oem": {
+            "Actions": {
+                "#PowerSupply.ClearFaults": {
+                    "target":  "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/4/Actions/PowerSupply.ClearFaults"
+                },
+                "#PowerSupply.FirmwareUpdate": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/4/Actions/PowerSupply.FirmwareUpdate",
+                    "FWRegion@Redfish.AllowableValues": [
+                        "A",
+                        "B",
+                        "Bootloader"
+                    ]
+                },
+                "#PowerSupply.FirmwareUpdateState": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/4/Actions/PowerSupply.FirmwareUpdateState",
+                    "Operation@Redfish.AllowableValues": [
+                        "Abort",
+                        "Query"
+                    ]
+                }
+            }
+        },
+        "PowerCapacityWatts": "{{psu4_power_capacity}}",
+        "LastPowerOutputWatts": "{{psu4_power_output_watt}}",
+        "Model": "{{psu4_model_number}}",
+        "Manufacturer": "{{psu4_manufacturer_name}}",
+        "FirmwareVersion": "{{psu4_firmware_version}}",
+        "SerialNumber": "{{psu4_serial_number}}",
+        "PartNumber": "{{psu4_part_number}}",
+        "RelatedItem": [
+        {
+            "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}"
+        }
+        ],
+        "Redundancy": [
+            {
+                "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/Redundancy/0"
+            }
+        ]
+    },
+    {
+        "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/PowerSupplies/5",
+        "MemberId": "5",
+        "Name": "Power Supply Bay 5",
+        "Status": {
+            "State": "Enabled",
+            "Health": "Warning",
+            "Oem": {
+                "Microsoft": {
+                    "@odata.type": "#OcsPower.v1_0_0.Status",
+                    "Faults": "Faults"
+                }
+            }
+        },
+        "Oem": {
+            "Actions": {
+                "#PowerSupply.ClearFaults": {
+                    "target":  "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/5/Actions/PowerSupply.ClearFaults"
+                },
+                "#PowerSupply.FirmwareUpdate": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/5/Actions/PowerSupply.FirmwareUpdate",
+                    "FWRegion@Redfish.AllowableValues": [
+                        "A",
+                        "B",
+                        "Bootloader"
+                    ]
+                },
+                "#PowerSupply.FirmwareUpdateState": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/5/Actions/PowerSupply.FirmwareUpdateState",
+                    "Operation@Redfish.AllowableValues": [
+                        "Abort",
+                        "Query"
+                    ]
+                }
+            }
+        },
+        "PowerCapacityWatts": "{{psu5_power_capacity}}",
+        "LastPowerOutputWatts": "{{psu5_power_output_watt}}",
+        "Model": "{{psu5_model_number}}",
+        "Manufacturer": "{{psu5_manufacturer_name}}",
+        "FirmwareVersion": "{{psu5_firmware_version}}",
+        "SerialNumber": "{{psu5_serial_number}}",
+        "PartNumber": "{{psu5_part_number}}",
+        "RelatedItem": [
+        {
+            "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}"
+        }
+        ],
+        "Redundancy": [
+            {
+                "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/Redundancy/0"
+            }
+        ]
+    },
+    {
+        "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power#/PowerSupplies/6",
+        "MemberId": "6",
+        "Name": "Power Supply Bay 6",
+        "Status": {
+            "State": "Enabled",
+            "Health": "Warning",
+            "Oem": {
+                "Microsoft": {
+                    "@odata.type": "#OcsPower.v1_0_0.Status",
+                    "Faults": "Faults"
+                }
+            }
+        },
+        "Oem": {
+            "Actions": {
+                "#PowerSupply.ClearFaults": {
+                    "target":  "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/6/Actions/PowerSupply.ClearFaults"
+                },
+                "#PowerSupply.FirmwareUpdate": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/6/Actions/PowerSupply.FirmwareUpdate",
+                    "FWRegion@Redfish.AllowableValues": [
+                        "A",
+                        "B",
+                        "Bootloader"
+                    ]
+                },
+                "#PowerSupply.FirmwareUpdateState": {
+                    "target": "/redfish/v1/Chassis/System/{{SLOT_ID}}/Power/PowerSupplies/6/Actions/PowerSupply.FirmwareUpdateState",
+                    "Operation@Redfish.AllowableValues": [
+                        "Abort",
+                        "Query"
+                    ]
+                }
+            }
+        },
+        "PowerCapacityWatts": "{{psu6_power_capacity}}",
+        "LastPowerOutputWatts": "{{psu6_power_output_watt}}",
+        "Model": "{{psu6_model_number}}",
+        "Manufacturer": "{{psu6_manufacturer_name}}",
+        "FirmwareVersion": "{{psu6_firmware_version}}",
+        "SerialNumber": "{{psu6_serial_number}}",
+        "PartNumber": "{{psu6_part_number}}",
         "RelatedItem": [
         {
             "@odata.id": "/redfish/v1/Chassis/System/{{SLOT_ID}}"
